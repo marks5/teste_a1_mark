@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import br.com.teste.entidade.Usuario;
 
@@ -50,5 +51,40 @@ public class UsuarioDAO {
 		}
 	}	
 
+	public void salvar(Usuario u){
+		if(u.getIdAluno() != null){
+			alterar(u);
+		}else{
+			cadastrar(u);
+		}
+	}
+	
+	
+	/**
+	 * Buscar registro no BD usando o ID do Aluno
+	 * @param idAluno E um inteiro que representa o id do aluno
+	 * @return Um objeto usuario se encontra um aluno, senão retorna nulo.
+	 */
+	public Usuario buscarPorId(Integer idAluno){
+		String sql = "select * from aluno where idAluno=?"; 
+		try(PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, idAluno);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Usuario u = new Usuario();
+				u.setIdAluno(rs.getInt("idAluno"));
+				u.setCpf(rs.getString("cpf"));
+				u.setLogin(rs.getString("login"));
+				u.setNome(rs.getString("nome"));
+				u.setSenha(rs.getString("senha"));
+				
+				return u;
+			}
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 }

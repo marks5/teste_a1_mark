@@ -7,9 +7,24 @@ public class TesteUsuarioDAO {
 
 	public static void main(String[] args) {
 		//Alterar();
-		Excluir();
+		//Excluir();
+		Salvar();
 	}
 
+	public static void Salvar(){
+		Usuario u = new Usuario();
+		//u.setIdAluno(12);
+		u.setCpf("444554");
+		u.setLogin("lokdo");
+		u.setNome("Rapad");
+		u.setSenha("1245");
+
+		UsuarioDAO UsuarioDao = new UsuarioDAO();
+		UsuarioDao.salvar(u);
+		
+		System.out.println("Salvo c Sucesso");
+	}
+	
 	public static void Excluir(){
 		Usuario u = new Usuario();
 		u.setIdAluno(12);
