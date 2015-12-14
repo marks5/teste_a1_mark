@@ -8,6 +8,11 @@ public class Usuario {
 	public Integer getIdAluno() {
 		return idAluno;
 	}
+	@Override
+	public String toString() {
+		return "Usuario [idAluno=" + idAluno + ", nome=" + nome + ", cpf=" + cpf + ", login=" + login + ", senha="
+				+ senha + "]";
+	}
 	public void setIdAluno(Integer idAluno) {
 		this.idAluno = idAluno;
 	}

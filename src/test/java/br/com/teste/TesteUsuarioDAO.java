@@ -1,5 +1,7 @@
 package br.com.teste;
 
+import java.util.List;
+
 import br.com.teste.entidade.Usuario;
 import br.com.teste.persistencia.jdbc.UsuarioDAO;
 
@@ -8,7 +10,41 @@ public class TesteUsuarioDAO {
 	public static void main(String[] args) {
 		//Alterar();
 		//Excluir();
-		Salvar();
+		//Salvar();
+		//BuscarId();
+		//BuscarTodos();
+		Autenticar();
+	}
+
+	private static void Autenticar() {
+		UsuarioDAO dao = new UsuarioDAO();
+		//new Usuario autentica = dao.autenticar(autentica);
+		Usuario user = new Usuario();
+		user.setLogin("vish");
+		user.setSenha("9273");
+		Usuario autenticado = dao.autenticar(user);
+		if(autenticado!=null){
+			System.out.println("Usuario autenticado" +autenticado.toString());
+		}else{
+			System.out.println("Usuario n autenticado");
+		}
+		
+	}
+
+	private static void BuscarTodos() {
+		UsuarioDAO dao = new UsuarioDAO();
+		List<Usuario> lista = dao.buscarTodos();
+		for (Usuario u: lista){
+			System.out.println(u);			
+		}
+		
+	}
+
+	private static void BuscarId() {
+		UsuarioDAO dao = new UsuarioDAO();
+		Usuario usuario = dao.buscarPorId(13);
+		System.out.println(usuario.toString());
+		
 	}
 
 	public static void Salvar(){
